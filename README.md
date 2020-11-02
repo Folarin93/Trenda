@@ -1,4 +1,5 @@
-#Trenda 
+# Trenda
+___________
 
 Trenda is web application which used for following and keeping up to date with the job demand for popular programming languages. Trenda provides visuals graphs of trends and provides key insights on the fluctuation in demand for current programming languages. 
 Users of the site can view up to date trends and can create and account where they can select specific programming languages to follow. Key insights and notifications are sent to users who have signed up during significant changes. 
