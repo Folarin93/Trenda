@@ -22,6 +22,8 @@ Members will select the login tab and be swiftly navigated to the login page. Th
 
 For users choosing to sign up and become members. They are redirected to a Signup form page where they can enter their credentials. Once validated they are then directed to their profile/dashboard page for them to setup it up and start using the application.
 
+![Login_Signup.png](./docs/Login_Signup.png)
+
 ##### Profile Page
 
 Here all the fun begins... In the users profile page, they should have a profile have a navigatin bar to move between their watchlist, settings and profile details. Here, the user can update their username, password and profile picture. Their dashboard will be to the right of the page which displays all their current watchlist of programming languages and trend information. The user can also switch between created watchlists and sort according to preferences.
