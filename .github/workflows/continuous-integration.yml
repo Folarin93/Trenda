@@ -1,23 +1,28 @@
-name: continuous integration
+name: continuous integration #Workflow name
 
 on:
   push:
-    branches: [ master ]
+    branches: [ master ] #The workflow triggered when pushed to master
 
 jobs:
   test_suite:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest #The test-suite, runs on the latest ubuntu VM
     steps:
       - name: Checkout Branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v2 # Loads repository into VM 
       - name: Set Up Python 3.8
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v2 # Installs Python 3.8
         with:
           python-version: 3.8
       - name: Install dependencies
+        # Install pip
+        # Install dependencies in requirements.txt if file exists
         run: |
-          python -m pip install --upgrade pip
+          python -m pip install --upgrade pip 
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Run Tests
-        run: | 
+      # Change directory to src
+      # Run tests
+        run: |
+          cd src
           python -m unittest discover tests/
