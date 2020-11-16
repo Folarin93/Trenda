@@ -46,10 +46,26 @@ For users choosing to sign up and become members. They are redirected to a Signu
 
 ##### Profile Page
 
-Here all the fun begins... In the users profile page, they should have a profile have a navigatin bar to move between their watchlist, settings and profile details. Here, the user can update their username, password and profile picture. Their dashboard will be to the right of the page which displays all their current watchlist of programming languages and trend information. The user can also switch between created watchlists and sort according to preferences.
+Here all the fun begins... In the users profile page, they should have a profile have a navigation bar to move between their watchlist, settings and profile details. Here, the user can update their username, password and profile picture. Their dashboard will be to the right of the page which displays all their current watchlist of programming languages and trend information. The user can also switch between created watchlists and sort according to preferences.
 
 ![Profile.png](./docs/wireframes/Profile.png)
 
+##### Settings Page
+The settings page is available for the user to update account credentials, details and notification preferences.
+
+![Settings.png](./docs/wireframes/Settings.png)
+
+###### Settings Account
+
+In this page the User can update their account credentials such as name, email,password and additionally add their number, their city and country.
+
+![Settings_Account.png](./docs/wireframes/Settings_Account.png)
+
+###### Settings Notifications
+This offers user notification preferences which would be tailored to information to they would like to be notified about concerning trends and application.
+This feature is a Work in Progress...
+
+![Settings_Notifications.png](./docs/wireframes/Settings_Notifications.png)
 
 ### CI/CD Pipeline
 ___________
