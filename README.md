@@ -72,3 +72,8 @@ ___________
 
 The CI/CD pipeline was created using Github Actions. It is initiated once pushed to master It runs the latest stable Ubuntu, installs Python3.8 and Pip. 
 The requirements.txt file is searched for and if found installs all dependencies included. The directory is changed into src and the tests are stored in the tests directory.
+
+### WIP Database Schema
+___________
+
+![Trenda_DB_Schema](/docs/DB_Schema.png)
