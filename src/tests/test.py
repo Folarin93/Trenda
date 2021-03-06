@@ -1,8 +1,8 @@
 import unittest
-from main import add
+# from main import add
 
-class TestMathFunctions(unittest.TestCase):
-        def test_add(self):
+class TestFunctions(unittest.TestCase):
+        def test_one(self):
                 pass
                 # result = add(1,5)
                 
