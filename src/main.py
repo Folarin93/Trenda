@@ -1,23 +1,45 @@
 from dotenv import load_dotenv
 load_dotenv()
 
-from flask_bcrypt import Bcrypt
-bcrypt = Bcrypt()
-
 from flask import Flask
-app = Flask(__name__)
-app.config.from_object("default_settings.app_config")
-
-from database import init_db
-db = init_db(app)
-
+# from flask import Flask, jsonify
+# from marshmallow.exceptions import ValidationError
+from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-mar = Marshmallow(app)
+from flask_bcrypt import Bcrypt
+# from flask_jwt_extended import JWTManager
+# from flask_migrate import Migrate
 
-from commands import db_commands
-app.register_blueprint(db_commands)
+db = SQLAlchemy()
+mar = Marshmallow()
+bcrypt = Bcrypt()
+# jwt = JWTManager()
+# migrate = Migrate()
 
-from controllers import registerable_controllers
 
-for controller in registerable_controllers:
-    app.register_blueprint(controller)
+def create_app():
+    #Flask applcation creation
+    app = Flask(__name__)
+    app.config.from_object("default_settings.app_config")
+
+    #Database connection
+    db.init_db(app)
+
+    #Setup Serializaition & Deserialization
+    mar.init_db(app)
+
+    bcrypt.init_app(app)
+    # jwt.init_app(app)
+    # migrate.init_app(app, db)
+
+    #Flask commands for database
+    from commands import db_commands
+    app.register_blueprint(db_commands)
+
+    #Controller registration
+    from controllers import registerable_controllers
+
+    for controller in registerable_controllers:
+        app.register_blueprint(controller)
+    
+    return app
