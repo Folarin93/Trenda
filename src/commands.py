@@ -1,5 +1,7 @@
-from main import db
+from main import db, bcrypt
 from flask import Blueprint
+from faker import Faker
+import random
 
 db_commands = Blueprint("db", __name__)
 
@@ -21,17 +23,16 @@ def seed_db():
     from models.Watchlist import Watchlist
     from models.Lang_watchlist import Lang_watchlist
 
-    from main import bcrypt
-    from faker import Faker
-    import random
+
 
     faker = Faker()
     users = []
     languages = []
     watchlists = []
+    colours = ['Red','White','Yellow','Green','Gold','Silver','Purple','Teal']
     list_FNames = ['Adam','Eve','Jada','Ryan','Alex','Myra','Amar','Jason','Frankie']
     list_LNames = ['Gold','Silver','Richardson','Teller','Rickers','Sarr','Farah','Reed','Port']
-    list_languages = ['Python': {"2020-09-27": 2270.5, "2020-09-28": 2271.0, "2020-09-29": 2315.0, "2020-09-30": 2282.5, "2020-10-01": 1517.0},'Javascript': {"2020-09-27": 1907.0, "2020-09-28": 1896.0, "2020-09-29": 1947.5, "2020-09-30": 1918.0, "2020-10-01": 1429.5},'HTML': {"2020-09-27": 1134.0, "2020-09-28": 1152.5, "2020-09-29": 1202.0, "2020-09-30": 1172.5, "2020-10-01": 1070.5},'CSS' {"2020-09-27": 899.5, "2020-09-28": 906.0, "2020-09-29": 928.5, "2020-09-30": 923.0, "2020-10-01": 925.0},'Swift': {"2020-09-27": 212.0, "2020-09-28": 218.5, "2020-09-29": 213.5, "2020-09-30": 213.5, "2020-10-01": 239.0},'Java': {"2020-09-27": 2356.0, "2020-09-28": 2346.0, "2020-09-29": 2393.5, "2020-09-30": 2365.0, "2020-10-01": 1275.0}]
+    list_languages = [{"Python": {"2020-09-27": 2270.5, "2020-09-28": 2271.0, "2020-09-29": 2315.0, "2020-09-30": 2282.5, "2020-10-01": 1517.0}},{'Javascript': {"2020-09-27":1907.0, "2020-09-28":1896.0, "2020-09-29":1947.5, "2020-09-30":1918.0, "2020-10-01":1429.5}},{'HTML': {"2020-09-27": 1134.0, "2020-09-28": 1152.5, "2020-09-29": 1202.0, "2020-09-30": 1172.5, "2020-10-01": 1070.5}},{'CSS': {"2020-09-27": 899.5, "2020-09-28": 906.0, "2020-09-29": 928.5, "2020-09-30": 923.0, "2020-10-01": 925.0}},{'Swift': {"2020-09-27": 212.0, "2020-09-28": 218.5, "2020-09-29": 213.5, "2020-09-30": 213.5, "2020-10-01": 239.0}},{'Java': {"2020-09-27": 2356.0, "2020-09-28": 2346.0, "2020-09-29": 2393.5, "2020-09-30": 2365.0, "2020-10-01": 1275.0}}]
 
     for i in range(9):
         user = Users()
@@ -49,16 +50,16 @@ def seed_db():
 
     for i in list_languages:
         language = Languages()
-        language.name = i.keys()
-        language.details = i[language.name]
+        language.name = str(i.keys())
+        language.details = i.get(language.name)
         db.session.add(language)
         languages.append(language)
     
     db.session.commit()
 
-    for i in range(15):
+    for i in colours:
         watchlist = Watchlist()
-        watchlist.name = f"{faker.safe_color_name()}_watchlist"
+        watchlist.name = f"{i}_watchlist"
         watchlist.user_id = random.choice(users).id
 
         db.session.add(watchlist)
@@ -79,4 +80,3 @@ def seed_db():
 
     print("Tables seeded")
     
-
