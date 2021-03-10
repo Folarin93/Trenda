@@ -1,1 +1,9 @@
 {% extends "layout.html" %}
+
+{% block content%}
+    {% for watchlist in watchlists%}
+        <h4>{{watchlist.name}}</h4>
+        <h4>{{watchlist.user_id}}</h4>
+    {% endfor %}
+
+{% endblock %}

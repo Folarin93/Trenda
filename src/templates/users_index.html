@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block content%}
+    {% for user in my_users%}
+        <h3>{{user.username}}</h3>
+        <h4>{{user.first_name}}</h4>
+        <h4>{{user.last_name}}</h4>
+        <h4>{{user.watchlist}}</h4>
+    {% endfor %}
+
+{% endblock %}

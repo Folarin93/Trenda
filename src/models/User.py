@@ -8,6 +8,6 @@ class Users(db.Model):
     last_name = db.Column(db.String())
     username = db.Column(db.String(), unique=True, nullable=False)
     email = db.Column(db.String(), unique=True, nullable=False)
-    password = db.Column(db.String(), unique=True, nullable=False)
+    password = db.Column(db.String(), nullable=False)
     phone = db.Column(db.Integer())
     watchlist = db.relationship("Watchlist", backref="user")

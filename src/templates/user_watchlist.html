@@ -1,0 +1,14 @@
+{% extends "layout.html" %}
+
+{% block content%}
+    {% for my_user_watchlist in my_user_watchlists%}
+        <h3>{{my_user_watchlist.name}}</h3>
+        <h4>{{my_user_watchlist.lang_watchlist}}</h4>
+        <!-- {% for user_watchlist_language in user_watchlist_languages%}
+            <h3>{{user_watchlist_language.name}}</h3>
+            <h4>{{my_user_watchlist.lang_watchlist}}</h4>
+        {% endfor %} -->
+
+    {% endfor %}
+
+{% endblock %}

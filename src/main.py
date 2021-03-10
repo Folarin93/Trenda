@@ -7,7 +7,6 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
-# from database import init_db
 # from flask_jwt_extended import JWTManager
 # from flask_migrate import Migrate
 
@@ -25,7 +24,6 @@ def create_app():
 
     #Database connection
     db.init_app(app)
-    # db = SQLAlchemy(app)
 
     #Setup Serializaition & Deserialization
     mar.init_app(app)

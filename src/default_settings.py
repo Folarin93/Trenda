@@ -1,10 +1,5 @@
 import os
 
-
-# SQLALCHEMY_DATABASE_URI = os.environ.get("DB_URI")
-# SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-
 class Config(object):
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     @property
@@ -26,13 +21,6 @@ class TestingConfig(Config):
     TESTING = True
 
 environment = os.environ.get("FLASK_ENV")
-
-# if environment == "production":
-#     app_config == ProductionConfig()
-# elif environment == "testing":
-#     app_config == TestingConfig()
-# else:
-#     app_config == DevelopmentConfig()
 
 if environment == "production":
     app_config = ProductionConfig()
