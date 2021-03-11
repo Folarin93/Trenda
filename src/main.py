@@ -7,13 +7,13 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
-# from flask_jwt_extended import JWTManager
+from flask_jwt_extended import JWTManager
 # from flask_migrate import Migrate
 
 db = SQLAlchemy()
 mar = Marshmallow()
 bcrypt = Bcrypt()
-# jwt = JWTManager()
+jwt = JWTManager()
 # migrate = Migrate()
 
 
@@ -29,7 +29,7 @@ def create_app():
     mar.init_app(app)
 
     bcrypt.init_app(app)
-    # jwt.init_app(app)
+    jwt.init_app(app)
     # migrate.init_app(app, db)
 
     #Flask commands for database

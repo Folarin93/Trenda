@@ -2,6 +2,7 @@ from main import db
 from models.Watchlist import Watchlist
 from schemas.WatchlistSchema import watchlist_schema, watchlists_schema
 from flask import Blueprint, request, jsonify, render_template
+from flask_jwt_extended import jwt_required
 
 watchlists = Blueprint('watchlists', __name__, url_prefix="/watchlists")
 

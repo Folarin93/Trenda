@@ -7,6 +7,7 @@ class WatchlistSchema(mar.SQLAlchemyAutoSchema):
     class Meta:
         model = Watchlist
         # include_fk = True
+    
     user = mar.Nested(user_schema)
 
 watchlist_schema = WatchlistSchema()

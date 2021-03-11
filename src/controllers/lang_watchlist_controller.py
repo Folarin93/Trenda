@@ -8,4 +8,4 @@ lang_watchlists = Blueprint('lang_watchlists', __name__, url_prefix="/lang_watch
 @lang_watchlists.route("/", methods=["GET"])
 def lang_watchlists_index():
     lang_watchlists = Lang_watchlist.query.all()
-    return jsonify(lang_watchlist_schema.dump(lang_watchlists))
+    return jsonify(lang_watchlists_schema.dump(lang_watchlists))

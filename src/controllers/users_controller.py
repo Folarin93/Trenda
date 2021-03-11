@@ -8,6 +8,7 @@ from schemas.LanguageSchema import language_schema, languages_schema
 from models.Lang_watchlist import Lang_watchlist
 from schemas.Lang_watchlistSchema import lang_watchlist_schema, lang_watchlists_schema
 from flask import Blueprint, request, jsonify, render_template
+from flask_jwt_extended import jwt_required
 
 users = Blueprint('users', __name__, url_prefix="/users")
 
@@ -19,18 +20,58 @@ def user_index():
 
 
 @users.route("/<int:id>", methods=["GET"])
+# @jwt_required
 def user_show(id):
+    # user_id = get_jwt_identity()
+    # user = User.query.get(user_id)
+
+    # if not user:
+    #     return abort(401, description="Invalid user")
+
     users = Users.query.get(id)
-    return render_template("user_show.html", my_user = users)
-    # return jsonify(user_schema.dump(users))
+    # return render_template("user_show.html", my_user = users)
+    return jsonify(user_schema.dump(users))
 
 @users.route("/<int:id>/watchlists", methods=["GET"])
+# @jwt_required
 def user_watchlists_show(id):
+    # user_id = get_jwt_identity()
+    # # user = User.query.get(user_id)
+
+    # # if not user:
+    # #     return abort(401, description="Invalid user")
+
     user_watchlists = Watchlist.query.filter_by(user_id=id)
     return render_template("user_watchlist.html", my_user_watchlists = user_watchlists)
-    # return jsonify(watchlists_schema.dump(user_watchlists))
 
-    
-    # user_watchlist_lang_watchlist = Lang_watchlist.query.filter_by(lang_watchlist=user_watchlists.id)
-    # user_watchlist_languages = Languages.query.filter_by(lang_watchlist=user_watchlist_lang_watchlist.language_id)
-    # return render_template("user_watchlist.html", my_user_watchlists = user_watchlists.lang_watchlist, my_user_watchlist_languages = my_user_watchlist_languages)
+
+
+
+
+
+
+
+
+# @users.route("/auth/logout", methods=["GET"])
+# def user_logout():
+#     pass
+
+# @users.route("/user/<int:id>", methods=["GET"])
+# def user_profile():
+#     pass
+
+# @users.route("/user/<int:id>", methods=["PUT", "PATCH"])
+# def user_update(id):
+#     pass
+
+# @users.route("/user/<int:id>/watchlists/<int:id>", methods=["POST"])
+# def user_add_watchlists(id):
+#     pass
+
+# @users.route("/user/<int:id>/watchlists/<int:id>/languages/<int:id>", methods=["POST"])
+# def user_add_language(id):
+#     pass
+
+# @users.route("/user/<int:id>/watchlists/<int:id>", methods=["DELETE"])
+# def user_del_watchlists(id):
+#     pass
