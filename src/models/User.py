@@ -10,4 +10,4 @@ class Users(db.Model):
     email = db.Column(db.String(), unique=True, nullable=False)
     password = db.Column(db.String(), nullable=False)
     phone = db.Column(db.Integer())
-    watchlist = db.relationship("Watchlist", backref="user")
+    watchlist = db.relationship("Watchlist", backref="user", cascade="all, delete")

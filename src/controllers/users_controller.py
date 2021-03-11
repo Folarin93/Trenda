@@ -5,8 +5,6 @@ from models.Watchlist import Watchlist
 from schemas.WatchlistSchema import watchlist_schema, watchlists_schema
 from models.Language import Languages
 from schemas.LanguageSchema import language_schema, languages_schema
-from models.Lang_watchlist import Lang_watchlist
-from schemas.Lang_watchlistSchema import lang_watchlist_schema, lang_watchlists_schema
 from flask import Blueprint, request, jsonify, render_template
 from flask_jwt_extended import jwt_required
 
@@ -15,8 +13,8 @@ users = Blueprint('users', __name__, url_prefix="/users")
 @users.route("/", methods=["GET"])
 def user_index():
     users = Users.query.all()
-    return render_template("users_index.html", my_users = users)
-    # return jsonify(users_schema.dump(users))
+    # return render_template("users_index.html", my_users = users)
+    return jsonify(users_schema.dump(users))
 
 
 @users.route("/<int:id>", methods=["GET"])
@@ -42,6 +40,7 @@ def user_watchlists_show(id):
     # #     return abort(401, description="Invalid user")
 
     user_watchlists = Watchlist.query.filter_by(user_id=id)
+    # return jsonify(watchlists_schema.dump(user_watchlists))
     return render_template("user_watchlist.html", my_user_watchlists = user_watchlists)
 
 

@@ -21,7 +21,7 @@ def seed_db():
     from models.User import Users
     from models.Language import Languages
     from models.Watchlist import Watchlist
-    from models.Lang_watchlist import Lang_watchlist
+
 
 
 
@@ -48,35 +48,44 @@ def seed_db():
     
     db.session.commit()
 
-    for i in list_languages:
-        language = Languages()
-        language.name = str(i.keys())
-        language.details = i.get(language.name)
-        db.session.add(language)
-        languages.append(language)
+    for lang in list_languages:
+        for i in lang:
+            language = Languages()
+            language.name = i
+            language.details = lang[i]
+            db.session.add(language)
+            languages.append(language)
     
     db.session.commit()
 
-    for i in colours:
-        watchlist = Watchlist()
-        watchlist.name = f"{i}_watchlist"
-        watchlist.user_id = random.choice(users).id
+ 
+    watchlist_1 = Watchlist()
+    watchlist_1.user_id = 1
+    watchlist_1.language_id = 3
 
-        db.session.add(watchlist)
-        watchlists.append(watchlist)
-    
-    db.session.commit()
-    
-    for i in range(20):
-        lang_watchlist = Lang_watchlist()
-        lang_watchlist.language_id = random.choice(languages).id
-        lang_watchlist.watchlist_id = random.choice(watchlists).id
+    db.session.add(watchlist_1)
 
-        db.session.add(lang_watchlist)
+    watchlist_2 = Watchlist()
+    watchlist_2.user_id = 1
+    watchlist_2.language_id = 4
+
+    db.session.add(watchlist_2)
     
     db.session.commit()
 
+    watchlist_3 = Watchlist()
+    watchlist_3.user_id = 2
+    watchlist_3.language_id = 1
 
+    db.session.add(watchlist_3)
+
+    watchlist_4 = Watchlist()
+    watchlist_4.user_id = 2
+    watchlist_4.language_id = 5
+
+    db.session.add(watchlist_4)
+    
+    db.session.commit()
 
     print("Tables seeded")
     

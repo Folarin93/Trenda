@@ -9,5 +9,5 @@ watchlists = Blueprint('watchlists', __name__, url_prefix="/watchlists")
 @watchlists.route("/", methods=["GET"])
 def watchlist_index():
     watchlists = Watchlist.query.all()
-    return render_template("watchlists_index.html", watchlists = watchlists)
-    # return jsonify(watchlists_schema.dump(watchlists))
+    # return render_template("watchlists_index.html", watchlists = watchlists)
+    return jsonify(watchlists_schema.dump(watchlists))
