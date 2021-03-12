@@ -8,6 +8,17 @@
     <body>
         <header>
             <h1>Welcome to Trenda</h1>
+            <nav>
+                {% if current_user.is_authenticated %}
+                    <a>{{ current_user.username }}</a>
+                    <a href="logout">Log out</a>
+                {% else %}
+                    <a href="/home">Home</a>
+                    <a href="/about">About</a>
+                    <a href="/signup">Sign Up</a>
+                    <a href="/login">Log in</a>
+                {% endif %}
+            </nav>
         </header>
         <div>
             {% block content%}

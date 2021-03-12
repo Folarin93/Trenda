@@ -1,7 +1,12 @@
 from main import db
 from models.Watchlist import Watchlist
+from flask_login import UserMixin
 
-class Users(db.Model):
+def get_user(user_id):
+    user=Users.query.filter_by(id=user_id).first()
+    return user
+
+class Users(db.Model, UserMixin):
     __tablename__="users"
     id = db.Column(db.Integer,primary_key=True)
     first_name = db.Column(db.String())
@@ -11,3 +16,4 @@ class Users(db.Model):
     password = db.Column(db.String(), nullable=False)
     phone = db.Column(db.Integer())
     watchlist = db.relationship("Watchlist", backref="user", cascade="all, delete")
+

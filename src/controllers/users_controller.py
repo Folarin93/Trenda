@@ -5,7 +5,8 @@ from models.Watchlist import Watchlist
 from schemas.WatchlistSchema import watchlist_schema, watchlists_schema
 from models.Language import Languages
 from schemas.LanguageSchema import language_schema, languages_schema
-from flask import Blueprint, request, jsonify, render_template
+from flask import Blueprint, request, jsonify, abort, render_template, redirect, url_for
+from flask_login import login_user, current_user, logout_user, login_required
 from flask_jwt_extended import jwt_required
 
 users = Blueprint('users', __name__, url_prefix="/users")
@@ -18,7 +19,6 @@ def user_index():
 
 
 @users.route("/<int:id>", methods=["GET"])
-# @jwt_required
 def user_show(id):
     # user_id = get_jwt_identity()
     # user = User.query.get(user_id)
@@ -27,11 +27,10 @@ def user_show(id):
     #     return abort(401, description="Invalid user")
 
     users = Users.query.get(id)
-    # return render_template("user_show.html", my_user = users)
-    return jsonify(user_schema.dump(users))
+    return render_template("user_show.html", my_user = users)
+    # return jsonify(user_schema.dump(users))
 
 @users.route("/<int:id>/watchlists", methods=["GET"])
-# @jwt_required
 def user_watchlists_show(id):
     # user_id = get_jwt_identity()
     # # user = User.query.get(user_id)
@@ -43,9 +42,15 @@ def user_watchlists_show(id):
     # return jsonify(watchlists_schema.dump(user_watchlists))
     return render_template("user_watchlist.html", my_user_watchlists = user_watchlists)
 
+@users.route("/<int:id>", methods=["PUT", "PATCH"])
+def user_update(id):
+    pass
 
-
-
+@users.route("/logout", methods=["GET"])
+@login_required
+def logout():
+    logout_user()
+    return render_template('home.html')
 
 
 
