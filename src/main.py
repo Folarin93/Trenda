@@ -9,6 +9,7 @@ from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from flask_login import LoginManager
+from flask_wtf.csrf import CSRFProtect
 # from flask_migrate import Migrate
 
 db = SQLAlchemy()
@@ -16,12 +17,12 @@ mar = Marshmallow()
 bcrypt = Bcrypt()
 jwt = JWTManager()
 login_manager = LoginManager()
-login_manager.login_view = "auth.login"
+csrf = CSRFProtect()
 # migrate = Migrate()
 
 
 def create_app():
-    #Flask applcation creation
+    #Flask application creation
     app = Flask(__name__)
     app.config.from_object("default_settings.app_config")
 
@@ -34,6 +35,8 @@ def create_app():
     bcrypt.init_app(app)
     jwt.init_app(app)
     login_manager.init_app(app)
+    login_manager.login_view = "auth.login"
+    csrf.init_app(app)
     # migrate.init_app(app, db)
 
     from models.User import get_user

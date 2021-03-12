@@ -17,34 +17,47 @@ def user_index():
     # return render_template("users_index.html", my_users = users)
     return jsonify(users_schema.dump(users))
 
-
 @users.route("/<int:id>", methods=["GET"])
+@login_required
+def profile(id):
+    users = Users.query.get(id)
+    return render_template("user_profile.html", my_user = users)
+
+@users.route("/<int:id>/details", methods=["GET"])
+@login_required
 def user_show(id):
-    # user_id = get_jwt_identity()
-    # user = User.query.get(user_id)
-
-    # if not user:
-    #     return abort(401, description="Invalid user")
-
     users = Users.query.get(id)
     return render_template("user_show.html", my_user = users)
-    # return jsonify(user_schema.dump(users))
+
+
+@users.route("/<int:id>", methods=["PUT", "PATCH"])
+@login_required
+def user_update(id):
+    username = request.form.get('username')
+    email = request.form.get('email')
+    password = request.form.get('password')
+    first_name = request.form.get('first_name')
+    last_name = request.form.get('last_name')
+    phone = request.form.get('phone')
+
+    my_user = Users()
+    my_user.username = username
+    my_user.email = email
+    my_user.password = bcrypt.generate_password_hash(password).decode("utf-8")
+    my_user.first_name = first_name
+    my_user.last_name = last_name
+    my_user.phone = phone
+
+    db.session.add(user)
+    db.session.commit()
+
+    return render_template('user_show.html', id=my_user.id)
 
 @users.route("/<int:id>/watchlists", methods=["GET"])
 def user_watchlists_show(id):
-    # user_id = get_jwt_identity()
-    # # user = User.query.get(user_id)
-
-    # # if not user:
-    # #     return abort(401, description="Invalid user")
-
     user_watchlists = Watchlist.query.filter_by(user_id=id)
-    # return jsonify(watchlists_schema.dump(user_watchlists))
     return render_template("user_watchlist.html", my_user_watchlists = user_watchlists)
 
-@users.route("/<int:id>", methods=["PUT", "PATCH"])
-def user_update(id):
-    pass
 
 @users.route("/logout", methods=["GET"])
 @login_required

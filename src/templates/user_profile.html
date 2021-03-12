@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+
+{% block content%}
+    <div>
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <a href="{{ url_for('users.user_show', id=my_user.id) }}"><button>View profile details</button></a>
+    </div>
+{% endblock %}
+

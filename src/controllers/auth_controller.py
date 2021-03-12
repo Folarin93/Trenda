@@ -30,7 +30,7 @@ def auth_register():
     db.session.commit()
 
     # return jsonify(user_schema.dump(user))
-    return redirect(url_for('users.user_show', id=user.id))
+    return redirect(url_for('users.profile', id=user.id))
 
     # for testing with insonmia
     # user_fields = user_schema.load(request.json)
@@ -63,7 +63,7 @@ def auth_login():
 
     
     login_user(user_username)
-    return redirect(url_for('users.user_show', id=user_username.id))
+    return redirect(url_for('users.profile', id=user_username.id))
 
 @auth.route("/signup", methods=["GET"])
 def signup():
