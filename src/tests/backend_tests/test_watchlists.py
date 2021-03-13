@@ -5,7 +5,7 @@ from models.Watchlist import Watchlist
 from models.Language import Languages
 from main import create_app, db
 
-class TestCommands(unittest.TestCase):
+class TestWatchlist(unittest.TestCase):
     #Runs before the tests
     @classmethod
     def setUp(cls):
@@ -27,8 +27,6 @@ class TestCommands(unittest.TestCase):
         db.drop_all()
         cls.app_context.pop()
 
-class TestWatchlits(unittest.TestCase):
-    #Runs before the tests
-    @classmethod
-    def test_get_all_watchlists(cls):
+
+    def test_get_all_watchlists(self):
         pass
