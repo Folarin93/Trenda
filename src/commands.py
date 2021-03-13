@@ -58,34 +58,40 @@ def seed_db():
     
     db.session.commit()
 
- 
-    watchlist_1 = Watchlist()
-    watchlist_1.user_id = 1
-    watchlist_1.language_id = 3
-
-    db.session.add(watchlist_1)
-
-    watchlist_2 = Watchlist()
-    watchlist_2.user_id = 1
-    watchlist_2.language_id = 4
-
-    db.session.add(watchlist_2)
-    
-    db.session.commit()
-
-    watchlist_3 = Watchlist()
-    watchlist_3.user_id = 2
-    watchlist_3.language_id = 1
-
-    db.session.add(watchlist_3)
-
-    watchlist_4 = Watchlist()
-    watchlist_4.user_id = 2
-    watchlist_4.language_id = 5
-
-    db.session.add(watchlist_4)
-    
+    for person in users:
+        for lang in languages:
+            user_watchlist = Watchlist()
+            user_watchlist.user_id = person.id
+            user_watchlist.language_id = lang.id
+            db.session.add(user_watchlist)
     db.session.commit()
 
     print("Tables seeded")
     
+    # watchlist_1 = Watchlist()
+    # watchlist_1.user_id = 1
+    # watchlist_1.language_id = 3
+
+    # db.session.add(watchlist_1)
+
+    # watchlist_2 = Watchlist()
+    # watchlist_2.user_id = 1
+    # watchlist_2.language_id = 4
+
+    # db.session.add(watchlist_2)
+    
+    # db.session.commit()
+
+    # watchlist_3 = Watchlist()
+    # watchlist_3.user_id = 2
+    # watchlist_3.language_id = 1
+
+    # db.session.add(watchlist_3)
+
+    # watchlist_4 = Watchlist()
+    # watchlist_4.user_id = 2
+    # watchlist_4.language_id = 5
+
+    # db.session.add(watchlist_4)
+    
+    # db.session.commit()

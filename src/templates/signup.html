@@ -3,8 +3,16 @@
 {% block content %}
     <div>
         <h3>Sign up</h3>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                    <p>{{msg}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
         <div>
             <form action="{{ url_for('auth.auth_register') }}" method="POST">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
                 <input type="text" name="username" placeholder="Username" autofocus="">
                 <input type="text" name="email" placeholder="email" >
                 <input type="password" name="password" placeholder="Password">

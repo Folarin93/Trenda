@@ -3,7 +3,19 @@
 {% block content%}
     <div>
         <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-        <a href="{{ url_for('users.user_show', id=my_user.id) }}"><button>View profile details</button></a>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for msg in messages %}
+                    <p>{{msg}}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        <div>
+            <a href="{{ url_for('users.user_show', id=my_user.id) }}"><button>View profile details</button></a>
+        </div>
+        <div>
+            <a href="{{ url_for('users.user_watchlists_show', id=my_user.id) }}"><button>View Watchlist</button></a>
+        </div>
     </div>
 {% endblock %}
 

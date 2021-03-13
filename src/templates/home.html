@@ -1,7 +1,38 @@
-{% extends "layout.html" %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+            Trenda
+        </title>
+    </head>
+    <body>
+        <header>
+            {% if current_user.is_authenticated %}
+                <h1><a href="">Trenda</a></h1>
+            {% else %}
+                <h1><a href="/home">Trenda</a></h1>
+                <div>
+                    <h4>Programming Language Job Market in real time</h4>
+                </div>
+            {% endif %}
+            <nav>
+                {% if current_user.is_authenticated %}
+                    <h2>Welcome{{ current_user.username }}</h2>
+                    <a href="logout">Log out</a>
+                {% else %}
+                    <a href="/home">Home</a>
+                    <a href="/signup">Sign Up</a>
+                    <a href="/login">Log in</a>
+                {% endif %}
+            </nav>
+        </header>
+        <div>
+            {% block content%}
 
-{% block content %}
-    <div>
-        <h3>TRENDA IS MASSIVE</h3>
-    </div>
-{% endblock %}
+
+
+            {% endblock %}
+        </div>
+        <footer>All rights reserved</footer>
+    </body>
+</html>

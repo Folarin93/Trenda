@@ -2,7 +2,7 @@
 
 {% block content%}
     <div>
-        <form action="{{ url_for('users.user_update', id=my_user.id) }}" method="PUT">
+        <form action="{{ url_for('users.user_update', id=my_user.id) }}" method="POST">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <input type="text" name="first_name" placeholder="{{my_user.first_name}}">
             <input type="text" name="last_name" placeholder="{{my_user.last_name}}">

@@ -5,9 +5,9 @@ from models.Watchlist import Watchlist
 from schemas.WatchlistSchema import watchlist_schema, watchlists_schema
 from models.Language import Languages
 from schemas.LanguageSchema import language_schema, languages_schema
-from flask import Blueprint, request, jsonify, abort, render_template, redirect, url_for
+from flask import Blueprint, request, jsonify, abort, render_template, redirect, url_for, flash
 from flask_login import login_user, current_user, logout_user, login_required
-from flask_jwt_extended import jwt_required
+
 
 users = Blueprint('users', __name__, url_prefix="/users")
 
@@ -30,7 +30,7 @@ def user_show(id):
     return render_template("user_show.html", my_user = users)
 
 
-@users.route("/<int:id>", methods=["PUT", "PATCH"])
+@users.route("/<int:id>", methods=["POST"])
 @login_required
 def user_update(id):
     username = request.form.get('username')
@@ -54,32 +54,27 @@ def user_update(id):
     return render_template('user_show.html', id=my_user.id)
 
 @users.route("/<int:id>/watchlists", methods=["GET"])
-def user_watchlists_show(id):
-    user_watchlists = Watchlist.query.filter_by(user_id=id)
-    return render_template("user_watchlist.html", my_user_watchlists = user_watchlists)
-
-
-@users.route("/logout", methods=["GET"])
 @login_required
-def logout():
-    logout_user()
-    return render_template('home.html')
+def user_watchlists_show(id):
+    users = Users.query.get(id)
+    user_watchlists = Watchlist.query.filter_by(user_id=id)
+    return render_template("user_watchlist.html", my_user_watchlists = user_watchlists, my_user = users)
 
+@users.route("/<int:id>/watchlists/languages", methods=["GET"])
+@login_required
+def user_languages(id):
+    languages = Languages.query.all()
+    user_languages = Watchlist.query.filter_by(user_id=id)
+    add_languages = []
+    
+    for lang in languages:
+        language = Watchlist.query.filter_by(language_id=lang.id, user_id=id).first()
+        if not language: 
+            add_languages.append(lang)
+        
 
+    return render_template("languages.html", add_languages = add_languages, my_languages = user_languages, id=current_user.id)
 
-
-
-# @users.route("/auth/logout", methods=["GET"])
-# def user_logout():
-#     pass
-
-# @users.route("/user/<int:id>", methods=["GET"])
-# def user_profile():
-#     pass
-
-# @users.route("/user/<int:id>", methods=["PUT", "PATCH"])
-# def user_update(id):
-#     pass
 
 # @users.route("/user/<int:id>/watchlists/<int:id>", methods=["POST"])
 # def user_add_watchlists(id):
