@@ -8,7 +8,9 @@ languages = Blueprint('languages', __name__, url_prefix="/languages")
 @languages.route("/", methods=["GET"])
 def language_index():
     languages = Languages.query.all()
-    return jsonify(languages_schema.dump(languages))
+
+    return jsonify(language_schema.dump(languages))
+    # return jsonify(languages_schema.dump(languages))
 
 
 @languages.route("/<int:id>", methods=["GET"])

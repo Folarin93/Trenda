@@ -7,6 +7,7 @@ from models.Language import Languages
 from schemas.LanguageSchema import language_schema, languages_schema
 from flask import Blueprint, request, jsonify, abort, render_template, redirect, url_for, flash
 from flask_login import login_user, current_user, logout_user, login_required
+from details import details
 
 
 users = Blueprint('users', __name__, url_prefix="/users")
@@ -58,7 +59,9 @@ def user_update(id):
 def user_watchlists_show(id):
     users = Users.query.get(id)
     user_watchlists = Watchlist.query.filter_by(user_id=id)
-    return render_template("user_watchlist.html", my_user_watchlists = user_watchlists, my_user = users)
+    language_info = details()
+
+    return render_template("user_watchlist.html", my_user_watchlists = user_watchlists, my_user = users, language_info = language_info)
 
 @users.route("/<int:id>/watchlists/languages", methods=["GET"])
 @login_required

@@ -6,11 +6,23 @@
     <h3>
         {{ current_user.first_name }}'s watchlist
     </h3>
-        {% for my_user_watchlist in my_user_watchlists%}
+        {% for my_user_watchlist in my_user_watchlists %}
             
             <h3>{{my_user_watchlist.language.name}}</h3>
-            <h3>{{my_user_watchlist.language.details}}</h3>
-        
+            {% for key, value in language_info.items() %}
+            
+                {% if key == my_user_watchlist.language.name  %}
+                
+                <h3>{{language_info[key][0]}}</h3>
+                <h3>{{language_info[key][1]}}</h3>
+                <h3>{{language_info[key][2]}}</h3>
+                <h3>{{language_info[key][3]}}</h3>
+                <h3>{{language_info[key][4]}}</h3>
+
+                {% endif %}
+
+            {% endfor %}
+
         {% endfor %}
     <div>
         <a href="{{ url_for('users.user_languages', id=my_user.id) }}"><button>Edit Watchlist</button></a>
