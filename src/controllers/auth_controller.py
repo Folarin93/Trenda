@@ -8,7 +8,7 @@ from schemas.LanguageSchema import language_schema, languages_schema
 from flask import Blueprint, request, jsonify, abort, render_template, redirect, url_for, flash
 from main import bcrypt
 from flask_login import login_user, current_user, logout_user, login_required
-from datetime import timedelta
+from datetime import datetime
 
 
 auth = Blueprint('auth', __name__)
@@ -68,15 +68,15 @@ def auth_login():
 
 @auth.route("/signup", methods=["GET"])
 def signup():
-    return render_template('signup.html')
+    return render_template('signup.html', year=datetime.now().year)
 
 @auth.route("/login", methods=["GET"])
 def login():
-    return render_template('login.html')
+    return render_template('login.html', year=datetime.now().year)
 
 @auth.route("/home", methods=["GET"])
 def home():
-    return render_template('home.html')
+    return render_template('home.html', year=datetime.now().year)
 
 
 @auth.route("/logout", methods=["GET"])

@@ -1,6 +1,6 @@
-<!DOCTYPE html>
 
-<html lang="en">
+
+{# <!DOCTYPE html> <html lang="en">
     <head>
         <title>
             Trenda
@@ -37,4 +37,18 @@
         </div>
         <footer>All rights reserved</footer>
     </body>
-</html>
+</html> #}
+
+{% extends "layout.html" %}
+{% block content %}
+    <div class="form-container">
+        <div class="home mx-auto">
+            <h2 class="home-title mb-3 font-weight-normal">
+                Welcome to Trenda
+            </h2>
+            <h5 class="h5 mb-3 font-weight-normal">
+                Programming Language Job Market in real time
+            </h5>
+        </div>
+    </div>
+{% endblock %}

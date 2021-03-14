@@ -1,22 +1,23 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <div>
-        <h3>Log in</h3>
+<div class="form-container">
+    <form class="form-signin" action="{{ url_for('auth.auth_login') }}" method="POST">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
         {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for msg in messages %}
-                    <p>{{msg}}</p>
-                {% endfor %}
-            {% endif %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
         {% endwith %}
-        <div>
-            <form action="{{ url_for('auth.auth_login') }}" method="POST">
-                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-                <input type="text" name="username" placeholder="Username/Email" autofocus="">
-                <input type="password" name="password" placeholder="Password">
-                <button>Log in</button>
-            </form>
-        </div>
-    </div>
+    
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+        <input class="form-control" type="text" name="username" placeholder="Username" autofocus="">
+        <input class="form-control" type="password" name="password" placeholder="Password">
+        <button class="btn btn-lg btn-primary btn-block">Log in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; {{year}}</p>
+    </form>
+</div>
+
 {% endblock %}
