@@ -13,6 +13,10 @@ from datetime import datetime
 
 auth = Blueprint('auth', __name__)
 
+@auth.route("/", methods=["GET"])
+def main_page():
+    return redirect(url_for('auth.home'))
+
 @auth.route("/auth/register", methods=["POST"])
 def auth_register():
     username = request.form.get('username')
