@@ -1,5 +1,10 @@
 # Trenda
 
+##URL
+https://trendah.herokuapp.com/home
+
+##
+
 **Trello board progress tracker**
 
 Link: https://trello.com/b/HxSpG3gM/trenda
@@ -21,7 +26,10 @@ ___________
 --- **Linux** source venv/bin/activate
 --- **Windows** .\venv\Scripts\activate
 - **Install dependencies**: pip install -r requirements.txt
-- **Run app**: python src/main.py
+- **Set APP**: ```set FLASK_APP="main:create_app()"```
+- **Set environment**: ```set FLASK_ENV=development```
+
+- **Run app**: ```flask run```
 
 ### Wireframes
 ___________
