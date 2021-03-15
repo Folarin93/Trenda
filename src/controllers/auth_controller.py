@@ -85,4 +85,9 @@ def logout():
     logout_user()
     return render_template('home.html')
 
+@auth.route("/profile", methods=["GET"])
+def trenda_profile():
+    return redirect(url_for('users.profile', id=current_user.id))
+
+
 

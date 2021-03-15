@@ -30,15 +30,25 @@ def user_show(id):
     users = Users.query.get(id)
     return render_template("user_show.html", my_user = users)
 
+@users.route("/<int:id>/delete", methods=["GET"])
+@login_required
+def user_delete(id):
+    users = Users.query.get(id)
+    
+    db.session.delete(users)
+    db.session.commit()
 
-@users.route("/<int:id>", methods=["POST"])
+    # return render_template('home.html', year=datetime.now().year)
+    return redirect(url_for('auth.home', my_user = users))
+
+@users.route("/<int:id>", methods=["GET"])
 @login_required
 def user_update(id):
+    first_name = request.form.get('first_name')
+    last_name = request.form.get('last_name')
     username = request.form.get('username')
     email = request.form.get('email')
     password = request.form.get('password')
-    first_name = request.form.get('first_name')
-    last_name = request.form.get('last_name')
     phone = request.form.get('phone')
 
     my_user = Users()

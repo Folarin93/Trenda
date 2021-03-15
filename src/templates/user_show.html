@@ -2,16 +2,19 @@
 
 {% block content%}
     <div>
-        <form action="{{ url_for('users.user_update', id=my_user.id) }}" method="POST">
+        <form action="{{ url_for('users.user_update', id=my_user.id) }}" method="GET">
             <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
             <input type="text" name="first_name" placeholder="{{my_user.first_name}}">
             <input type="text" name="last_name" placeholder="{{my_user.last_name}}">
             <input type="text" name="username" placeholder="{{my_user.username}}" autofocus="">
             <input type="email" name="email" placeholder="{{my_user.email}}" >
             <input type="password" name="password" placeholder="*******">
-            <input type="number" name="phone" placeholder="{{my_user.phone}}">
+            <input type="text" name="phone" placeholder="{{my_user.phone}}">
             <button>Update</button>
         </form>
+        <div>
+            <a href="{{ url_for('users.user_delete', id=my_user.id) }}"><button>Delete Profile</button></a>
+        </div>
         <div>
             <a href="{{ url_for('users.profile', id=my_user.id) }}"><button>Return to profile</button></a>
         </div>
