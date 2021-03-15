@@ -4,26 +4,48 @@
 <div>
     <input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
     <h3>
-        {{ current_user.first_name }}'s watchlist
+        {{ current_user.username }}'s watchlist
     </h3>
-        {% for my_user_watchlist in my_user_watchlists %}
-            
-            <h3>{{my_user_watchlist.language.name}}</h3>
-            {% for key, value in language_info.items() %}
-            
-                {% if key == my_user_watchlist.language.name  %}
-                
-                <h3>{{language_info[key][0]}}</h3>
-                <h3>{{language_info[key][1]}}</h3>
-                <h3>{{language_info[key][2]}}</h3>
-                <h3>{{language_info[key][3]}}</h3>
-                <h3>{{language_info[key][4]}}</h3>
+    <table class="table">
 
-                {% endif %}
+        <thead>
+                <tr>
+                    <th>Language</th>
+                    <th>Today's Job Postings</th>
+                    <th>Net Change</th>
+                    <th>% Change</th>
+                    <th>1 Month</th>
+                    <th>Last Updated</th>
+                </tr>
+
+        </thead>
+        <tbody>
+            {% for my_user_watchlist in my_user_watchlists %}
+                <tr>
+                    <td>{{my_user_watchlist.language.name}}</td>
+                    {% for key, value in language_info.items() %}
+                    
+                        {% if key == my_user_watchlist.language.name  %}
+                        
+                        <td>{{language_info[key][0]}}</td>
+                        <td>{{language_info[key][1]}}</td>
+                        <td>{{language_info[key][2]}}</td>
+                        <td>{{language_info[key][3]}}</td>
+                        <td>{{language_info[key][4]}}</td>
+
+                        {% endif %}
+
+                    {% endfor %}
+
+
+                </tr>
 
             {% endfor %}
 
-        {% endfor %}
+        </tbody>
+
+
+    </table>
     <div>
         <a href="{{ url_for('users.user_languages', id=my_user.id) }}"><button>Edit Watchlist</button></a>
     </div>
