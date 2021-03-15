@@ -2,15 +2,12 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from flask import Flask
-# from flask import Flask, jsonify
-# from marshmallow.exceptions import ValidationError
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_bcrypt import Bcrypt
 from flask_jwt_extended import JWTManager
 from flask_login import LoginManager
 from flask_wtf.csrf import CSRFProtect
-# from flask_migrate import Migrate
 
 db = SQLAlchemy()
 mar = Marshmallow()
@@ -18,7 +15,6 @@ bcrypt = Bcrypt()
 jwt = JWTManager()
 login_manager = LoginManager()
 csrf = CSRFProtect()
-# migrate = Migrate()
 
 
 def create_app():
