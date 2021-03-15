@@ -38,7 +38,6 @@ def user_delete(id):
     db.session.delete(users)
     db.session.commit()
 
-    # return render_template('home.html', year=datetime.now().year)
     return redirect(url_for('auth.home', my_user = users))
 
 @users.route("/<int:id>", methods=["GET"])
